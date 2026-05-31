@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS Etiologie CASCADE;
-
 CREATE TABLE Etiologie (
     cnp VARCHAR(20) REFERENCES Pacienti (cnp) ON DELETE CASCADE,
     UNIQUE (cnp),
