@@ -2,36 +2,36 @@ CREATE TABLE Etiologie (
     cnp VARCHAR(20) REFERENCES Pacienti (cnp) ON DELETE CASCADE,
     UNIQUE (cnp),
     etiologie_diagnosticata BOOLEAN NOT NULL,
-    idiopatica BOOLEAN,
-    postinfectioasa BOOLEAN,
-    inf_bacteriana BOOLEAN,
-    inf_tuberculoasa BOOLEAN,
-    inf_virala BOOLEAN,
-    inf_respiratorii_copilarie BOOLEAN,
-    imunodeficienta BOOLEAN,
-    imuno_primara BOOLEAN,
-    imuno_secundara BOOLEAN,
-    obstructiva BOOLEAN,
-    obstr_corp_strain BOOLEAN,
-    obstr_tumora BOOLEAN,
-    obstr_stenoza BOOLEAN,
-    boli_tesut_conjunctiv BOOLEAN,
-    tc_poliartrita BOOLEAN,
-    tc_lupus BOOLEAN,
-    tc_sjogren BOOLEAN,
-    tc_vasculite BOOLEAN,
-    tc_sclerodermie BOOLEAN,
-    tc_boli_intestinale BOOLEAN,
-    tc_altele BOOLEAN,
-    defecte_congenitale BOOLEAN,
-    cong_alfa1 BOOLEAN,
-    cong_diskinezie BOOLEAN,
-    cong_altele BOOLEAN,
-    post_inhalare_toxice BOOLEAN,
-    alte_categorii BOOLEAN,
-    alte_tractiune BOOLEAN,
-    alte_post_transplant BOOLEAN,
-    alte_altele BOOLEAN,
+    idiopatica BOOLEAN DEFAULT FALSE,
+    postinfectioasa BOOLEAN DEFAULT FALSE,
+    inf_bacteriana BOOLEAN DEFAULT FALSE,
+    inf_tuberculoasa BOOLEAN DEFAULT FALSE,
+    inf_virala BOOLEAN DEFAULT FALSE,
+    inf_respiratorii_copilarie BOOLEAN DEFAULT FALSE,
+    imunodeficienta BOOLEAN DEFAULT FALSE,
+    imuno_primara BOOLEAN DEFAULT FALSE,
+    imuno_secundara BOOLEAN DEFAULT FALSE,
+    obstructiva BOOLEAN DEFAULT FALSE,
+    obstr_corp_strain BOOLEAN DEFAULT FALSE,
+    obstr_tumora BOOLEAN DEFAULT FALSE,
+    obstr_stenoza BOOLEAN DEFAULT FALSE,
+    boli_tesut_conjunctiv BOOLEAN DEFAULT FALSE,
+    tc_poliartrita BOOLEAN DEFAULT FALSE,
+    tc_lupus BOOLEAN DEFAULT FALSE,
+    tc_sjogren BOOLEAN DEFAULT FALSE,
+    tc_vasculite BOOLEAN DEFAULT FALSE,
+    tc_sclerodermie BOOLEAN DEFAULT FALSE,
+    tc_boli_intestinale BOOLEAN DEFAULT FALSE,
+    tc_altele BOOLEAN DEFAULT FALSE,
+    defecte_congenitale BOOLEAN DEFAULT FALSE,
+    cong_alfa1 BOOLEAN DEFAULT FALSE,
+    cong_diskinezie BOOLEAN DEFAULT FALSE,
+    cong_altele BOOLEAN DEFAULT FALSE,
+    post_inhalare_toxice BOOLEAN DEFAULT FALSE,
+    alte_categorii BOOLEAN DEFAULT FALSE,
+    alte_tractiune BOOLEAN DEFAULT FALSE,
+    alte_post_transplant BOOLEAN DEFAULT FALSE,
+    alte_altele BOOLEAN DEFAULT FALSE,
     an_diagnostic_etiologic INT CHECK (an_diagnostic_etiologic >= 1900),
     CONSTRAINT check_poarta_etiologie CHECK (
         etiologie_diagnosticata = TRUE
@@ -108,13 +108,3 @@ CREATE TABLE Etiologie (
     )
 );
 
-INSERT INTO Etiologie (cnp, etiologie_diagnosticata, postinfectioasa, inf_bacteriana, an_diagnostic_etiologic)
-VALUES ('1980501123456', TRUE, TRUE, TRUE, 2020);
-INSERT INTO Etiologie (cnp, etiologie_diagnosticata)
-VALUES ('2950602123456', FALSE);
--- INSERT INTO Etiologie (cnp, etiologie_diagnosticata, obstructiva)
--- VALUES ('1980703123456', FALSE, TRUE);
--- INSERT INTO Etiologie (cnp, etiologie_diagnosticata, inf_bacteriana)
--- VALUES ('1980703123456', TRUE, TRUE);
--- INSERT INTO Etiologie (cnp, etiologie_diagnosticata, an_diagnostic_etiologic)
--- VALUES ('2950602123456', TRUE, 1850);
