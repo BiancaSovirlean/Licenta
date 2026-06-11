@@ -23,7 +23,7 @@ function ListaPacienti() {
   return (
     <div>
       <h2>Lista pacienti</h2>
-      <table>
+      <table className="tabel">
         <thead>
           <tr>
             <th>Nume</th>

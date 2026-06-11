@@ -1,5 +1,5 @@
 // pages/AdaugaPacient.jsx - pagina cu formularul de adaugare pacient (date demografice).
-// Codul a fost mutat aici din App.jsx cand am adaugat rutarea. Logica e aceeasi.
+// Logica de salvare e neschimbata; doar am organizat campurile pe carduri-rubrici.
 
 import { useState } from "react";
 
@@ -93,194 +93,214 @@ function AdaugaPacient() {
   return (
     <div>
       <h2>Adauga pacient</h2>
+
       <form onSubmit={trimite}>
-        <label>
-          Nume
-          <input name="nume" value={form.nume} onChange={schimba} required />
-        </label>
-        <label>
-          Prenume
-          <input
-            name="prenume"
-            value={form.prenume}
-            onChange={schimba}
-            required
-          />
-        </label>
-        <label>
-          CNP
-          <input
-            name="cnp"
-            value={form.cnp}
-            onChange={schimba}
-            maxLength="13"
-            required
-          />
-        </label>
-        <label>
-          Anul diagnosticului
-          <input
-            type="number"
-            name="data_diagnosticului"
-            value={form.data_diagnosticului}
-            onChange={schimba}
-            min="1900"
-            placeholder="ex. 2020"
-          />
-        </label>
-
-        <label>
-          Status vital
-          <select
-            name="status_vital"
-            value={form.status_vital}
-            onChange={schimba}
-          >
-            <option value="in viata">in viata</option>
-            <option value="decedat">decedat</option>
-          </select>
-        </label>
-
-        {/* campurile de deces apar doar daca pacientul e decedat */}
-        {form.status_vital === "decedat" && (
-          <>
+        {/* ---------- RUBRICA: Date demografice ---------- */}
+        <div className="card">
+          <div className="card-titlu">Date demografice</div>
+          <div className="grid-2">
             <label>
-              Data decesului
+              Nume
+              <input name="nume" value={form.nume} onChange={schimba} required />
+            </label>
+            <label>
+              Prenume
               <input
-                type="date"
-                name="data_decesului"
-                value={form.data_decesului}
+                name="prenume"
+                value={form.prenume}
                 onChange={schimba}
                 required
               />
             </label>
             <label>
-              Cauza decesului
+              CNP
+              <input
+                name="cnp"
+                value={form.cnp}
+                onChange={schimba}
+                maxLength="13"
+                required
+              />
+            </label>
+            <label>
+              Anul diagnosticului
+              <input
+                type="number"
+                name="data_diagnosticului"
+                value={form.data_diagnosticului}
+                onChange={schimba}
+                min="1900"
+                placeholder="ex. 2020"
+              />
+            </label>
+            <label>
+              Inaltime (cm)
+              <input
+                type="number"
+                name="inaltime"
+                value={form.inaltime}
+                onChange={schimba}
+              />
+            </label>
+            <label>
+              Greutate (kg)
+              <input
+                type="number"
+                name="greutate"
+                value={form.greutate}
+                onChange={schimba}
+              />
+            </label>
+          </div>
+        </div>
+
+        {/* ---------- RUBRICA: Status vital & fumat ---------- */}
+        <div className="card">
+          <div className="card-titlu">Status vital & fumat</div>
+          <div className="grid-2">
+            <label>
+              Status vital
               <select
-                name="cauza_decesului"
-                value={form.cauza_decesului}
+                name="status_vital"
+                value={form.status_vital}
+                onChange={schimba}
+              >
+                <option value="in viata">in viata</option>
+                <option value="decedat">decedat</option>
+              </select>
+            </label>
+
+            {/* campurile de deces apar doar daca pacientul e decedat */}
+            {form.status_vital === "decedat" && (
+              <>
+                <label>
+                  Data decesului
+                  <input
+                    type="date"
+                    name="data_decesului"
+                    value={form.data_decesului}
+                    onChange={schimba}
+                    required
+                  />
+                </label>
+                <label>
+                  Cauza decesului
+                  <select
+                    name="cauza_decesului"
+                    value={form.cauza_decesului}
+                    onChange={schimba}
+                    required
+                  >
+                    <option value="">- alege -</option>
+                    <option value="respiratorie">respiratorie</option>
+                    <option value="non respiratorie">non respiratorie</option>
+                    <option value="nu se cunoaste">nu se cunoaste</option>
+                  </select>
+                </label>
+              </>
+            )}
+
+            <label>
+              Status fumator
+              <select
+                name="status_fumator"
+                value={form.status_fumator}
                 onChange={schimba}
                 required
               >
                 <option value="">- alege -</option>
-                <option value="respiratorie">respiratorie</option>
-                <option value="non respiratorie">non respiratorie</option>
-                <option value="nu se cunoaste">nu se cunoaste</option>
+                <option value="nefumator">nefumator</option>
+                <option value="fumator_activ">fumator activ</option>
+                <option value="ex_fumator">ex fumator</option>
               </select>
             </label>
-          </>
-        )}
 
-        <label>
-          Inaltime (cm)
-          <input
-            type="number"
-            name="inaltime"
-            value={form.inaltime}
-            onChange={schimba}
-          />
-        </label>
-        <label>
-          Greutate (kg)
-          <input
-            type="number"
-            name="greutate"
-            value={form.greutate}
-            onChange={schimba}
-          />
-        </label>
+            {/* pachete-an apar doar daca pacientul fumeaza sau a fumat */}
+            {esteFumator && (
+              <label>
+                Pachete-an (interval)
+                <select
+                  name="pachete_an_interval"
+                  value={form.pachete_an_interval}
+                  onChange={schimba}
+                  required
+                >
+                  <option value="">- alege -</option>
+                  <option value="0-19">0-19</option>
+                  <option value="20-40">20-40</option>
+                  <option value=">40">&gt;40</option>
+                </select>
+              </label>
+            )}
+          </div>
+        </div>
 
-        <label>
-          Status fumator
-          <select
-            name="status_fumator"
-            value={form.status_fumator}
-            onChange={schimba}
-            required
-          >
-            <option value="">- alege -</option>
-            <option value="nefumator">nefumator</option>
-            <option value="fumator_activ">fumator activ</option>
-            <option value="ex_fumator">ex fumator</option>
-          </select>
-        </label>
+        {/* ---------- RUBRICA: Expuneri la noxe ---------- */}
+        <div className="card">
+          <div className="card-titlu">Expuneri la noxe</div>
+          <div className="grid-2">
+            <label>
+              Expunere la pulberi
+              <select
+                name="expuneri_noxe_pulberi"
+                value={form.expuneri_noxe_pulberi}
+                onChange={schimba}
+              >
+                <option value="false">Nu</option>
+                <option value="true">Da</option>
+              </select>
+            </label>
 
-        {/* pachete-an apar doar daca pacientul fumeaza sau a fumat */}
-        {esteFumator && (
-          <label>
-            Pachete-an (interval)
-            <select
-              name="pachete_an_interval"
-              value={form.pachete_an_interval}
-              onChange={schimba}
-              required
-            >
-              <option value="">- alege -</option>
-              <option value="0-19">0-19</option>
-              <option value="20-40">20-40</option>
-              <option value=">40">&gt;40</option>
-            </select>
-          </label>
-        )}
+            {/* detaliul pulberilor apare doar daca exista expunere */}
+            {form.expuneri_noxe_pulberi === "true" && (
+              <label>
+                Tip pulberi
+                <select
+                  name="noxe_pulberi_detaliat"
+                  value={form.noxe_pulberi_detaliat}
+                  onChange={schimba}
+                  required
+                >
+                  <option value="">- alege -</option>
+                  <option value="organice">organice</option>
+                  <option value="anorganice">anorganice</option>
+                </select>
+              </label>
+            )}
 
-        <label>
-          Expunere la noxe / pulberi
-          <select
-            name="expuneri_noxe_pulberi"
-            value={form.expuneri_noxe_pulberi}
-            onChange={schimba}
-          >
-            <option value="false">Nu</option>
-            <option value="true">Da</option>
-          </select>
-        </label>
+            <label>
+              Expunere la gaze / fumuri
+              <select
+                name="expuneri_noxe_gaze_fumuri"
+                value={form.expuneri_noxe_gaze_fumuri}
+                onChange={schimba}
+              >
+                <option value="false">Nu</option>
+                <option value="true">Da</option>
+              </select>
+            </label>
 
-        {/* detaliul pulberilor apare doar daca exista expunere */}
-        {form.expuneri_noxe_pulberi === "true" && (
-          <label>
-            Tip pulberi
-            <select
-              name="noxe_pulberi_detaliat"
-              value={form.noxe_pulberi_detaliat}
-              onChange={schimba}
-              required
-            >
-              <option value="">- alege -</option>
-              <option value="organice">organice</option>
-              <option value="anorganice">anorganice</option>
-            </select>
-          </label>
-        )}
+            <label>
+              Expunere la vapori / solventi
+              <select
+                name="expuneri_noxe_vapori_solventi"
+                value={form.expuneri_noxe_vapori_solventi}
+                onChange={schimba}
+              >
+                <option value="false">Nu</option>
+                <option value="true">Da</option>
+              </select>
+            </label>
+          </div>
+        </div>
 
-        <label>
-          Expunere la noxe / gaze-fumuri
-          <select
-            name="expuneri_noxe_gaze_fumuri"
-            value={form.expuneri_noxe_gaze_fumuri}
-            onChange={schimba}
-          >
-            <option value="false">Nu</option>
-            <option value="true">Da</option>
-          </select>
-        </label>
-
-        <label>
-          Expunere la noxe / vapori-solventi
-          <select
-            name="expuneri_noxe_vapori_solventi"
-            value={form.expuneri_noxe_vapori_solventi}
-            onChange={schimba}
-          >
-            <option value="false">Nu</option>
-            <option value="true">Da</option>
-          </select>
-        </label>
-
-        <button type="submit">Salveaza</button>
+        <div className="actiuni">
+          <button type="submit">Salveaza pacient</button>
+        </div>
       </form>
 
       {mesaj && (
-        <p style={{ color: mesaj.ok ? "green" : "red", fontWeight: "bold" }}>
+        <p className={"mesaj " + (mesaj.ok ? "mesaj-ok" : "mesaj-eroare")}>
           {mesaj.text}
         </p>
       )}

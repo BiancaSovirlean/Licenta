@@ -12,7 +12,7 @@ import FisaPacient from "./pages/FisaPacient.jsx";
 
 function App() {
   return (
-    <div>
+    <div className="container">
       <h1>Pacienti cu bronsiectazii</h1>
 
       {/* meniul apare pe toate paginile */}

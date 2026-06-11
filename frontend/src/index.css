@@ -1,0 +1,209 @@
+/* index.css - stilurile globale ale aplicatiei.
+   Paleta e definita o singura data, ca variabile CSS (:root).
+   Daca medicul vrea alta culoare, schimbi aici intr-un singur loc
+   si se actualizeaza tot site-ul. */
+
+:root {
+  /* paleta calda-neutra */
+  --fundal: #f2ebe0;          /* fundalul paginii */
+  --card: #fbf8f2;            /* fundalul cardurilor */
+  --margine: #e5ddd0;         /* marginile cardurilor */
+  --text: #3b342c;            /* text principal */
+  --text-secundar: #8a8071;   /* etichete, text mai sters */
+  --accent: #2e7163;          /* culoarea de actiune (butoane, accente) */
+  --accent-inchis: #245a4f;   /* accent la hover */
+  --accent-fundal: #ddebe6;   /* fundal deschis pentru pastile/accente */
+
+  --camp-fundal: #fcfaf6;     /* fundalul campurilor de formular */
+  --camp-margine: #d8cfc0;    /* marginea campurilor */
+
+  --ok-text: #2e7163;         /* mesaj de succes */
+  --ok-fundal: #ddebe6;
+  --eroare-text: #a6492f;     /* mesaj de eroare (terracotta, nu rosu strident) */
+  --eroare-fundal: #f3e4dd;
+
+  --raza: 8px;                /* rotunjirea coltului */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  background: var(--fundal);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* containerul care tine continutul centrat */
+.container {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 20px 16px 60px;
+}
+
+h1 {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 14px;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 4px 2px 14px;
+}
+
+/* ---------- bara de navigare ---------- */
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  background: var(--card);
+  border: 1px solid var(--margine);
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 18px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--text-secundar);
+  font-size: 14px;
+  padding-bottom: 2px;
+}
+
+.nav-link.activ {
+  color: var(--accent);
+  font-weight: 600;
+  border-bottom: 2px solid var(--accent);
+}
+
+/* ---------- carduri / rubrici ---------- */
+.card {
+  background: var(--card);
+  border: 1px solid var(--margine);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-bottom: 12px;
+}
+
+.card-titlu {
+  font-size: 13px;
+  font-weight: 600;
+  color: #5a5247;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 14px;
+}
+
+/* grila pe doua coloane pentru campuri */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* un camp care ocupa toata latimea (peste cele doua coloane) */
+.full {
+  grid-column: 1 / -1;
+}
+
+/* ---------- campuri de formular ---------- */
+label {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  color: var(--text-secundar);
+  gap: 4px;
+}
+
+input,
+select {
+  padding: 8px 10px;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--camp-fundal);
+  border: 1px solid var(--camp-margine);
+  border-radius: 6px;
+  font-family: inherit;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* ---------- butoane ---------- */
+.actiuni {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+button {
+  padding: 9px 22px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #fff;
+  font-family: inherit;
+}
+
+button:hover {
+  background: var(--accent-inchis);
+  border-color: var(--accent-inchis);
+}
+
+/* ---------- mesaje ---------- */
+.mesaj {
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  margin: 12px 0;
+}
+
+.mesaj-ok {
+  color: var(--ok-text);
+  background: var(--ok-fundal);
+}
+
+.mesaj-eroare {
+  color: var(--eroare-text);
+  background: var(--eroare-fundal);
+}
+
+/* ---------- tabel ---------- */
+.tabel {
+  border-collapse: collapse;
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--margine);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.tabel th,
+.tabel td {
+  padding: 10px 12px;
+  font-size: 13px;
+  text-align: left;
+  border-bottom: 1px solid var(--margine);
+}
+
+.tabel th {
+  background: #f0e9dd;
+  color: #5a5247;
+  font-weight: 600;
+}
+
+.tabel tr:last-child td {
+  border-bottom: none;
+}
