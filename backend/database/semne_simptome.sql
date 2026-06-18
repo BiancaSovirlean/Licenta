@@ -1,5 +1,6 @@
 CREATE TABLE
     SemneSimptome (
+        cnp VARCHAR(20) REFERENCES Pacienti (cnp) ON DELETE CASCADE,
         status_simptomatologie VARCHAR(20) CHECK (
             status_simptomatologie IN ('asimptomatic', 'simptomatic')
         ) NOT NULL,
