@@ -3,6 +3,7 @@
 // De aici medicul va intra (mai tarziu) in fisa unui pacient.
 
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function ListaPacienti() {
   // useState = cum tine React minte o valoare care se poate schimba.
@@ -33,6 +34,7 @@ function ListaPacienti() {
             <th>Status</th>
             <th>Fumator</th>
             <th>IMC</th>
+            <th>Fisa</th>
           </tr>
         </thead>
         <tbody>
@@ -45,6 +47,9 @@ function ListaPacienti() {
               <td>{p.status_vital}</td>
               <td>{p.status_fumator}</td>
               <td>{p.imc}</td>
+              <td>
+                <Link to={`/pacient/${p.cnp}`}>Vezi fisa</Link>
+              </td>
             </tr>
           ))}
         </tbody>

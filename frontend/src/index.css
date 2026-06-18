@@ -207,3 +207,13 @@ button:hover {
 .tabel tr:last-child td {
   border-bottom: none;
 }
+
+.eticheta {
+  font-size: 12px;
+  color: var(--text-secundar);
+}
+
+.valoare {
+  font-size: 16px;
+  color: var(--text);
+}
