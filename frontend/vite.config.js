@@ -10,6 +10,7 @@ export default defineConfig({
     // fiindca din punctul de vedere al browserului totul vine de pe 5173.
     proxy: {
       "/pacienti": "http://localhost:3000",
+      "/scoruri": "http://localhost:3000",
     },
   },
 });

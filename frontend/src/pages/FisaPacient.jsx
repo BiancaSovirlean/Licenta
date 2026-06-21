@@ -4,6 +4,7 @@
 
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Scoruri from "./fisa/Scoruri";
 
 function FisaPacient() {
   const { cnp } = useParams();
@@ -44,7 +45,7 @@ function FisaPacient() {
           </div>
           <div>
             <div className="eticheta">Status Vital</div>
-            <div className="valoare">{pacient.stare_vitala}</div>
+            <div className="valoare">{pacient.status_vital}</div>
           </div>
           <div>
             <div className="eticheta">Status Fumator</div>
@@ -57,7 +58,7 @@ function FisaPacient() {
           
         </div>
       </div>
-
+      <Scoruri cnp={cnp}/>
     </div>
 
   );
