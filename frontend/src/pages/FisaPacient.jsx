@@ -9,6 +9,7 @@ import Scoruri from "./fisa/Scoruri";
 function FisaPacient() {
   const { cnp } = useParams();
   const [pacient, setPacient] = useState(null);
+  const [tab, setTab] = useState("profil");
 
   async function incarcaPacient() {
     const raspuns = await fetch(`/pacienti/${cnp}`);
@@ -21,46 +22,58 @@ function FisaPacient() {
   }, [cnp]);
 
   if (!pacient) return <p>Se incarca...</p>;
+
+
   return (
+    <div className="tab-bar">
     <div>
       <h2>{pacient.nume} {pacient.prenume}</h2>
-      <div className="card">
-        <div className="card-titlu">Profil pacient</div>
-        <div className="grid-2">
-          <div>
-            <div className="eticheta">CNP</div>
-            <div className="valoare">{pacient.cnp}</div>
-          </div>
-          <div>
-            <div className="eticheta">Sex</div>
-            <div className="valoare">{pacient.sex}</div>
-          </div>
-          <div>
-            <div className="eticheta">Data Nasterii</div>
-            <div className="valoare">{pacient.date_of_birth}</div>
-          </div>
-          <div>
-            <div className="eticheta">IMC</div>
-            <div className="valoare">{pacient.imc}</div>
-          </div>
-          <div>
-            <div className="eticheta">Status Vital</div>
-            <div className="valoare">{pacient.status_vital}</div>
-          </div>
-          <div>
-            <div className="eticheta">Status Fumator</div>
-            <div className="valoare">{pacient.status_fumator}</div>
-          </div>
-          <div>
-            <div className="eticheta">Anul Diagnosticului</div>
-            <div className="valoare">{pacient.data_diagnosticului}</div>
-          </div>
-          
-        </div>
-      </div>
-      <Scoruri cnp={cnp}/>
-    </div>
 
+      <div className="tab-bar">
+        <button className={tab === "profil" ? "tab activ" : "tab"} onClick={() => setTab("profil")}>Profil</button>
+  <button className={tab === "scoruri" ? "tab activ" : "tab"} onClick={() => setTab("scoruri")}>Scoruri si Calitatea Vietii</button>
+      </div>
+      
+
+      {tab === "profil" && (
+        <div className="card">
+          <div className="card-titlu">Profil pacient</div>
+          <div className="grid-2">
+            <div>
+              <div className="eticheta">CNP</div>
+              <div className="valoare">{pacient.cnp}</div>
+            </div>
+            <div>
+              <div className="eticheta">Sex</div>
+              <div className="valoare">{pacient.sex}</div>
+            </div>
+            <div>
+              <div className="eticheta">Data Nasterii</div>
+              <div className="valoare">{pacient.date_of_birth}</div>
+            </div>
+            <div>
+              <div className="eticheta">IMC</div>
+              <div className="valoare">{pacient.imc}</div>
+            </div>
+            <div>
+              <div className="eticheta">Status Vital</div>
+              <div className="valoare">{pacient.status_vital}</div>
+            </div>
+            <div>
+              <div className="eticheta">Status Fumator</div>
+              <div className="valoare">{pacient.status_fumator}</div>
+            </div>
+            <div>
+              <div className="eticheta">Anul Diagnosticului</div>
+              <div className="valoare">{pacient.data_diagnosticului}</div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {tab === "scoruri" && <Scoruri cnp={cnp} />}
+    </div>
+    </div>
   );
 }
 
