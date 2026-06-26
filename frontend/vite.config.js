@@ -11,6 +11,8 @@ export default defineConfig({
     proxy: {
       "/pacienti": "http://localhost:3000",
       "/scoruri": "http://localhost:3000",
+      "/spirometrie": "http://localhost:3000",
+      "/hrct": "http://localhost:3000",
     },
   },
 });

@@ -130,7 +130,6 @@ function AdaugaPacient() {
                 value={form.data_diagnosticului}
                 onChange={schimba}
                 min="1900"
-                placeholder="ex. 2020"
               />
             </label>
             <label>

@@ -11,6 +11,8 @@ const pool = require("./db");
 // Importam routerul cu rutele de pacienti.
 const pacientiRouter = require("./routes/pacienti");
 const scoruriRouter = require("./routes/scoruri");
+const spirometrieRouter = require("./routes/spirometrie");
+const hrctRouter = require("./routes/hrct");
 
 // 3. Cream aplicatia Express.
 const app = express();
@@ -27,6 +29,8 @@ app.get("/", (req, res) => {
 // Agatam routerul: tot ce incepe cu /pacienti merge la pacientiRouter.
 app.use("/pacienti", pacientiRouter);
 app.use("/scoruri", scoruriRouter);
+app.use("/spirometrie", spirometrieRouter);
+app.use("/hrct", hrctRouter);
 
 // 6. Ruta /health - verifica daca ne putem conecta la baza de date.
 //    Rulam o interogare simpla (SELECT NOW()) care cere ora din DB.

@@ -14,6 +14,7 @@ function Scoruri({ cnp }) {
     }
 
     useEffect(() => { incarcaScoruri(); }, [cnp]);
+    
     if (!scoruri) return <p>Nu exista scoruri pentru acest pacient.</p>;
     return (
         <div className="card">

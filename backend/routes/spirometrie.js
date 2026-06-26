@@ -1,6 +1,5 @@
-// routes/scoruri.js - rute pentru Scoruri (tabelul scoruri).
-// Scoruri de severitate, ex. BACI.
-// In server.js: app.use("/scoruri", require("./routes/scoruri"));
+// spirometrie.js - rute pentru Spirometrie (tabelul spirometrie).
+// In server.js: app.use("/spirometrie", require("./routes/spirometrie"));
 
 const express = require("express");
 const router = express.Router();
@@ -10,7 +9,7 @@ router.get("/:cnp", async (req, res) => {
     try {
         const { cnp } = req.params;
         const result = await pool.query(
-            "SELECT * FROM Scoruri WHERE cnp = $1",
+            "SELECT * FROM Spirometrie WHERE cnp = $1",
             [cnp]
         )
         if (result.rows.length === 0) {
@@ -25,18 +24,15 @@ router.get("/:cnp", async (req, res) => {
 
 router.post("/", async (req, res) => {
     try {
-        const {
-            cnp,
-            bsi_severitate,
-            faced_severitate
-        }= req.body;
+        const { cnp, data_spirometriei, fvc_l, fvc_proc, fev1_l, fev1_proc, fev1_fvc, interpretare, severitate } = req.body;
         const result = await pool.query(
-            'INSERT INTO Scoruri (cnp, bsi_severitate, faced_severitate) VALUES ($1, $2, $3) RETURNING *',
-            [cnp, bsi_severitate, faced_severitate]
+            'INSERT INTO Spirometrie (cnp, data_spirometriei, fvc_l, fvc_proc, fev1_l, fev1_proc, fev1_fvc, interpretare, severitate) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *',
+            [cnp, data_spirometriei, fvc_l, fvc_proc, fev1_l, fev1_proc, fev1_fvc, interpretare, severitate]
         )
         res.status(201).json(result.rows[0]);
     } catch (error) {
         res.status(400).json({ eroare: error.message });
     }
 });
+
 module.exports = router;

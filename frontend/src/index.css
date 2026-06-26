@@ -82,7 +82,7 @@ h2 {
   border-bottom: 2px solid var(--accent);
 }
 
-tab.-bar {
+.tab-bar {
   display: flex;
   gap: 12px;
   margin-bottom: 18px;
@@ -111,9 +111,9 @@ tab.-bar {
 }
 
 .card-titlu {
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 600;
-  color: #5a5247;
+  color: var(--accent);
   text-transform: uppercase;
   letter-spacing: 0.04em;
   margin-bottom: 14px;
@@ -126,9 +126,30 @@ tab.-bar {
   gap: 12px;
 }
 
+/* grila pe trei coloane (ex. cei trei lobi pe acelasi rand) */
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+
 /* un camp care ocupa toata latimea (peste cele doua coloane) */
 .full {
   grid-column: 1 / -1;
+}
+
+/* titlu de sectiune in interiorul unui card: spatiu mai mare deasupra
+   ca sa se vada o delimitare clara intre sectiuni */
+.card-titlu.sectiune {
+  margin-top: 28px;
+  color: var(--text-secundar);
+}
+
+/* lista de semne asociate: unul sub altul, compact */
+.lista-simpla {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 /* ---------- campuri de formular ---------- */

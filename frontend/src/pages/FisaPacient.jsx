@@ -5,6 +5,11 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Scoruri from "./fisa/Scoruri";
+import Spirometrie from "./fisa/Spirometrie";
+import FormularSpirometrie from "./fisa/FormularSpirometrie";
+import Hrct from "./fisa/Hrct";
+import FormularHrct from "./fisa/FormularHRCT";
+import { formateazaData } from "../utils/data";
 
 function FisaPacient() {
   const { cnp } = useParams();
@@ -25,15 +30,16 @@ function FisaPacient() {
 
 
   return (
-    <div className="tab-bar">
-    <div>
+    <div> 
       <h2>{pacient.nume} {pacient.prenume}</h2>
 
       <div className="tab-bar">
         <button className={tab === "profil" ? "tab activ" : "tab"} onClick={() => setTab("profil")}>Profil</button>
-  <button className={tab === "scoruri" ? "tab activ" : "tab"} onClick={() => setTab("scoruri")}>Scoruri si Calitatea Vietii</button>
+        <button className={tab === "scoruri" ? "tab activ" : "tab"} onClick={() => setTab("scoruri")}>Scoruri si Calitatea Vietii</button>
+      <button className={tab === "spirometrie" ? "tab activ" : "tab"} onClick={() => setTab("spirometrie")}>Spirometrie</button>
+      <button className={tab === "hrct" ? "tab activ" : "tab"} onClick={() => setTab("hrct")}>HRCT</button>
       </div>
-      
+
 
       {tab === "profil" && (
         <div className="card">
@@ -49,7 +55,7 @@ function FisaPacient() {
             </div>
             <div>
               <div className="eticheta">Data Nasterii</div>
-              <div className="valoare">{pacient.date_of_birth}</div>
+              <div className="valoare">{formateazaData(pacient.date_of_birth)}</div>
             </div>
             <div>
               <div className="eticheta">IMC</div>
@@ -72,7 +78,18 @@ function FisaPacient() {
       )}
 
       {tab === "scoruri" && <Scoruri cnp={cnp} />}
-    </div>
+      {tab === "spirometrie" && (
+        <>
+          <Spirometrie cnp={cnp} />
+          <FormularSpirometrie cnp={cnp} />
+        </>
+      )}
+      {tab === "hrct" && (
+        <>
+          <Hrct cnp={cnp} />
+          <FormularHrct cnp={cnp} />
+        </>
+      )}
     </div>
   );
 }
