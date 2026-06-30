@@ -3,6 +3,7 @@
 // tip de bronsiectazii (cilindrice, varicoase, chistice) si semne asociate.
 
 import { useState, useEffect } from "react";
+import FormularHrct from "./FormularHrct";
 
 // lista semnelor asociate: cheia din baza + eticheta afisata
 const SEMNE = [
@@ -15,18 +16,24 @@ const SEMNE = [
 
 function Hrct({ cnp }) {
   const [hrct, setHrct] = useState(null);
+const [gata, setGata] = useState(false); 
 
-  async function incarcaHrct() {
-    const raspuns = await fetch(`/hrct/${cnp}`);
-    if (raspuns.ok) {
-      const date = await raspuns.json();
-      setHrct(date);
-    }
+async function incarcaHrct() {
+  const raspuns = await fetch(`/hrct/${cnp}`);
+  if (raspuns.ok) {
+    const date = await raspuns.json();
+    setHrct(date);
+  } else {
+    setHrct(null);
   }
+  setGata(true);
+}
 
   useEffect(() => { incarcaHrct(); }, [cnp]);
 
-  if (!hrct) return <p>Nu exista date de HRCT pentru acest pacient.</p>;
+  if (!gata) return <p>Se incarca...</p>;
+
+  if (!hrct) return <FormularHrct cnp={cnp} onSalvat={incarcaHrct} />;
 
   // pentru un lob: daca are valoare e tipul de bronsiectazii, altfel lobul e neafectat
   function afiseazaLob(valoare) {

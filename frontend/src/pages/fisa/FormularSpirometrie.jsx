@@ -15,7 +15,7 @@ const formGol = {
   severitate: "",
 };
 
-function FormularSpirometrie({ cnp }) {
+function FormularSpirometrie({ cnp, onSalvat}) {
   const [form, setForm] = useState(formGol);
   const [mesaj, setMesaj] = useState(null);
 
@@ -60,7 +60,8 @@ function FormularSpirometrie({ cnp }) {
 
     if (raspuns.ok) {
       setMesaj({ text: "Spirometrie salvata cu succes.", ok: true });
-      setForm(formGol); // golim formularul
+      setForm(formGol); 
+      if (onSalvat) onSalvat();
     } else {
       const eroare = await raspuns.json();
       setMesaj({ text: "Eroare: " + eroare.eroare, ok: false });

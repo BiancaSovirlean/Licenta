@@ -1,21 +1,28 @@
 import { useState, useEffect } from "react";
 import { formateazaLunaAn } from "../../utils/data";
-
+import FormularSpirometrie from "./FormularSpirometrie";
 
 function Spirometrie({ cnp }) {
     const [spiro, setSpiro] = useState(null);
+    const [gata, setGata] = useState(false); 
 
     async function incarcaSpiro() {
         const raspuns = await fetch(`/spirometrie/${cnp}`);
         if (raspuns.ok) {
             const date = await raspuns.json();
             setSpiro(date);
+        } else {
+            setSpiro(null);
         }
+        setGata(true);
     }
 
     useEffect(() => { incarcaSpiro(); }, [cnp]);
 
-    if (!spiro) return <p>Nu exista date de spirometrie pentru acest pacient.</p>;
+    if (!gata) return <p>Se incarca...</p>;
+
+    if (!spiro) return <FormularSpirometrie cnp={cnp} onSalvat={incarcaSpiro} />;
+    
     return (
         <div className="card">
             <div className="card-titlu">Spirometrie</div>

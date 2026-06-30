@@ -42,7 +42,7 @@ function SelectLob({ nume, eticheta, form, schimba }) {
   );
 }
 
-function FormularHRCT({ cnp }) {
+function FormularHRCT({ cnp, onSalvat }) {
   const [form, setForm] = useState(formGol);
   const [mesaj, setMesaj] = useState(null);
 
@@ -74,7 +74,8 @@ function FormularHRCT({ cnp }) {
 
     if (raspuns.ok) {
       setMesaj({ text: "HRCT salvat cu succes.", ok: true });
-      setForm(formGol); // golim formularul
+      setForm(formGol); 
+      if (onSalvat) onSalvat(); 
     } else {
       const eroare = await raspuns.json();
       setMesaj({ text: "Eroare: " + eroare.eroare, ok: false });

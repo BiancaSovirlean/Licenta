@@ -6,9 +6,9 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Scoruri from "./fisa/Scoruri";
 import Spirometrie from "./fisa/Spirometrie";
-import FormularSpirometrie from "./fisa/FormularSpirometrie";
 import Hrct from "./fisa/Hrct";
 import FormularHrct from "./fisa/FormularHRCT";
+import SemneSimptome from "./fisa/SemneSimptome";
 import { formateazaData } from "../utils/data";
 
 function FisaPacient() {
@@ -38,6 +38,7 @@ function FisaPacient() {
         <button className={tab === "scoruri" ? "tab activ" : "tab"} onClick={() => setTab("scoruri")}>Scoruri si Calitatea Vietii</button>
       <button className={tab === "spirometrie" ? "tab activ" : "tab"} onClick={() => setTab("spirometrie")}>Spirometrie</button>
       <button className={tab === "hrct" ? "tab activ" : "tab"} onClick={() => setTab("hrct")}>HRCT</button>
+      <button className={tab === "semne" ? "tab activ" : "tab"} onClick={() => setTab("semne")}>Semne si simptome</button>
       </div>
 
 
@@ -81,13 +82,16 @@ function FisaPacient() {
       {tab === "spirometrie" && (
         <>
           <Spirometrie cnp={cnp} />
-          <FormularSpirometrie cnp={cnp} />
         </>
       )}
       {tab === "hrct" && (
         <>
           <Hrct cnp={cnp} />
-          <FormularHrct cnp={cnp} />
+        </>
+      )}
+      {tab === "semne" && (
+        <>
+          <SemneSimptome cnp={cnp} />
         </>
       )}
     </div>

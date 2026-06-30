@@ -13,6 +13,7 @@ export default defineConfig({
       "/scoruri": "http://localhost:3000",
       "/spirometrie": "http://localhost:3000",
       "/hrct": "http://localhost:3000",
+      "/semne-simptome": "http://localhost:3000",
     },
   },
 });

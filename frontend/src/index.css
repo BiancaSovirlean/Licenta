@@ -10,15 +10,15 @@
   --margine: #e5ddd0;         /* marginile cardurilor */
   --text: #3b342c;            /* text principal */
   --text-secundar: #8a8071;   /* etichete, text mai sters */
-  --accent: #2e7163;          /* culoarea de actiune (butoane, accente) */
-  --accent-inchis: #245a4f;   /* accent la hover */
-  --accent-fundal: #ddebe6;   /* fundal deschis pentru pastile/accente */
+  --accent: #b06a4f;          /* culoarea de actiune (butoane, accente) - caramiziu/clay */
+  --accent-inchis: #97553c;   /* accent la hover */
+  --accent-fundal: #f0e2da;   /* fundal deschis pentru pastile/accente */
 
   --camp-fundal: #fcfaf6;     /* fundalul campurilor de formular */
   --camp-margine: #d8cfc0;    /* marginea campurilor */
 
-  --ok-text: #2e7163;         /* mesaj de succes */
-  --ok-fundal: #ddebe6;
+  --ok-text: #7d5a3a;         /* mesaj de succes (brun cald, diferit de eroare) */
+  --ok-fundal: #efe6d8;
   --eroare-text: #a6492f;     /* mesaj de eroare (terracotta, nu rosu strident) */
   --eroare-fundal: #f3e4dd;
 
